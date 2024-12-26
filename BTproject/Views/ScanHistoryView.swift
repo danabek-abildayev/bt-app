@@ -18,7 +18,7 @@ struct ScanHistoryView: View {
     var body: some View {
         VStack {
             HStack {
-                TextField("Filter by name", text: $viewModel.filterText)
+                TextField("Filter by ssid", text: $viewModel.filterText)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                 
@@ -38,14 +38,22 @@ struct ScanHistoryView: View {
                         .font(.subheadline)
                 }
             }
+            
+            Button("Clear filtering") {
+                viewModel.clearFilter()
+            }
+            .padding()
+            .background(.blue)
+            .foregroundColor(.white)
+            .cornerRadius(8)
         }
         .onAppear {
             viewModel.fetchScanHistory()
-            viewModel.applyFilter()
         }
+        .padding(.bottom)
         .navigationTitle("Scan history")
-        .onChange(of: viewModel.filterText) { _ in viewModel.applyFilter() }
-        .onChange(of: viewModel.filterDate) { _ in viewModel.applyFilter() }
+        .onChange(of: viewModel.filterText) { _ in viewModel.applySSIDFilter() }
+        .onChange(of: viewModel.filterDate) { _ in viewModel.applyDateFilter() }
     }
     
     private var dateFormatter: DateFormatter {

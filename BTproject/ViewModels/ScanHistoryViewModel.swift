@@ -32,9 +32,9 @@ class ScanHistoryViewModel: ObservableObject {
                 timestamp: $0.timestamp ?? Date(),
                 deviceName: $0.deviceName ?? "Unnamed device"
             ) }
-            applyFilter()
+            clearFilter()
         } catch {
-            print("Ошибка загрузки истории сканирования: \(error)")
+            print(error)
         }
     }
 
@@ -48,16 +48,27 @@ class ScanHistoryViewModel: ObservableObject {
             try context.save()
             fetchScanHistory()
         } catch {
-            print("Ошибка сохранения: \(error)")
+            print(error)
         }
     }
 
-    func applyFilter() {
+    func applySSIDFilter() {
         filteredHistory = scanHistory.filter { entry in
             let matchesText = filterText.isEmpty || entry.deviceName.lowercased().contains(filterText.lowercased())
-            let matchesDate = filterDate == nil || Calendar.current.isDate(entry.timestamp, inSameDayAs: filterDate!)
-            return matchesText && matchesDate
+            return matchesText
         }
+    }
+    
+    func applyDateFilter() {
+        filteredHistory = scanHistory.filter { entry in
+            let matchesDate = filterDate == nil || Calendar.current.isDate(entry.timestamp, inSameDayAs: filterDate!)
+            return matchesDate
+        }
+    }
+    
+    func clearFilter() {
+        filteredHistory = scanHistory
+        filterText = ""
     }
 }
 

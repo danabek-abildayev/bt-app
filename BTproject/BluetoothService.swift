@@ -11,10 +11,11 @@ import CoreBluetooth
 class BluetoothService: NSObject, ObservableObject {
     private var centralManager: CBCentralManager!
     
-    @Published var discoveredPeripherals: [CBPeripheral] = []
     @Published var scanResults: [(CBPeripheral, NSNumber)] = []
     @Published var isBluetoothOn: Bool = false
     @Published var statusUpdates: (uuid: String, status: DeviceStatus)?
+    
+    private var discoveredPeripherals: [CBPeripheral] = []
 
     override init() {
         super.init()

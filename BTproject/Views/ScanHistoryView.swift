@@ -18,7 +18,7 @@ struct ScanHistoryView: View {
     var body: some View {
         VStack {
             HStack {
-                TextField("Filter by ssid", text: $viewModel.filterText)
+                TextField("Filter by name", text: $viewModel.filterText)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                 

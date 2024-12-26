@@ -122,26 +122,6 @@ class BluetoothViewModel: ObservableObject {
         }
         bluetoothService.connect(to: peripheral)
     }
-    
-    //MARK: wifi ssid
-    //    func getWIFISSID() {
-    //        NEHotspotNetwork.fetchCurrent(completionHandler: { [weak self] (network) in
-    //            if let unwrappedNetwork = network {
-    //                let networkSSID = unwrappedNetwork.ssid
-    //                print("Network: \(networkSSID)")
-    //                self?.saveScanInfo(networkSSID)
-    //            } else {
-    //                print("No available network")
-    //            }
-    //        })
-    //    }
-    //
-    //    private func saveScanInfo(_ ssid: String) {
-    //        let timestamp = Date()
-    //        let networkSSID = ssid
-    //        historyViewModel.saveScan(timestamp: timestamp, deviceName: networkSSID)
-    //    }
-    
 }
 
 struct BluetoothDeviceModel: Identifiable {
